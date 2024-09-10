@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mysql:8.0.34
+    command: >
+      bash -c '
+      tail -F /var/lib/mysql/general.log &
+      /usr/local/bin/docker-entrypoint.sh mysqld
+      --table-definition-cache=400 --default-authentication-plugin=mysql_native_password
+      '
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - TZ=UTC
+    networks:
+      - sea-orm-practice-network
+    ports:
+      - ${MYSQL_PORT}:3306
+volumes:
+  db:
+networks:
+  sea-orm-practice-network:
+    name: sea-orm-practice-network

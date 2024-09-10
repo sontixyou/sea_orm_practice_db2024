@@ -1,0 +1,23 @@
+[package]
+name = "sea-orm-practice-20240911"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = ["migration"]
+
+[dependencies]
+async-trait = "0.1.82"
+dotenv = "0.15.0"
+futures = "0.3.30"
+rand = "0.8.5"
+sea-orm = { version = "1.0.1", features = [
+  "sqlx-mysql",
+  "runtime-async-std-native-tls",
+  "macros",
+] }
+test-context = "0.3.0"
+tokio = { version = "1.40.0", features = ["full"] }
+
+[dependencies.migration]
+path = "./migration"
